@@ -57,22 +57,20 @@ export class GetUsers {
 export class getOneUsers {
     static getOneAdmin = async (req: Request, res: Response) => {
         const id = req.params.id;
-        const admin = await AppDataSource.getRepository(Admin).findOne(id);
+        const admin = await AppDataSource.getRepository(Admin).findOneBy({id: parseInt(req.params.id)});
         return res.json(admin);
     };
 
     static getOneUser = async (req: Request, res: Response) => {
         const id = req.params.id;
-        const user = await AppDataSource.getRepository(Users).findOne(id);
+        const user = await AppDataSource.getRepository(Users).findOneBy({id: parseInt(req.params.id)});
         return res.json(user);
     };
 };
 
 export class updateUsers {
     static updateAdmin = async (req: Request, res: Response) => {
-        const admin = await AppDataSource.getRepository(Admin).findOneBy({
-            id: req.params.id,
-        });
+        const admin = await AppDataSource.getRepository(Admin).findOneBy({id: parseInt(req.params.id)});
         if (admin) {
             AppDataSource.getRepository(Admin).merge(admin, req.body);
             const result = await AppDataSource.getRepository(Admin).save(admin);
@@ -82,7 +80,7 @@ export class updateUsers {
     };
 
     static updateUser = async (req: Request, res: Response) => {
-        const user = await AppDataSource.getRepository(Admin).findOne(req.params.id);
+        const user = await AppDataSource.getRepository(Admin).findOneBy({id: parseInt(req.params.id)});
         if (user) {
             AppDataSource.getRepository(Users).merge(user, req.body);
             const result = await AppDataSource.getRepository(Admin).save(user);
