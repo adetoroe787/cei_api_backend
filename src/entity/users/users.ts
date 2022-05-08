@@ -13,6 +13,14 @@ import {
     IsEmail,
 } from "class-validator"
 
+export enum UserRole {
+    ADMIN = "Admin",
+    LECTURER = "Lecturer",
+    SECTARY = "Sectary",
+    EDITOR = "Editor",
+    STUDENT = "Student",
+}
+
 @Entity()
 export class Users extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -44,10 +52,20 @@ export class Users extends BaseEntity {
     @Length(10,11)
     phone: number;
 
-    @Column()
+    @Column({type: 'text', nullable: true})
     address: string;
 
-    @Column()
+    @Column({
+        type: "enum",
+        enum: UserRole,
+        default: UserRole.STUDENT,
+    })
+    role: UserRole
+
+    @Column({type: 'text', nullable: true})
+    about: string;
+
+    @Column({default: true})
 	is_active: boolean;
 
     @Column()
@@ -57,9 +75,6 @@ export class Users extends BaseEntity {
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
-
-
-
-   
+     
 }
 
