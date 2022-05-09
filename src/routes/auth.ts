@@ -1,4 +1,4 @@
-const User = require("../entity/users/users");
+const User = require("../entity/users");
 const CryptoJS = require("crypto-js");
 const router = require("express").Router();
 

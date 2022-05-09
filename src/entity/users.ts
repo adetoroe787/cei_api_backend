@@ -2,7 +2,6 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    BaseEntity,
     Generated,
     CreateDateColumn,
     UpdateDateColumn,
@@ -22,7 +21,7 @@ export enum UserRole {
 }
 
 @Entity()
-export class Users extends BaseEntity {
+export class Users  {
     @PrimaryGeneratedColumn()
     id: number;
 

@@ -30,7 +30,7 @@ export class Test {
     @OneToMany(() => Question, (question) => question.test)
     question: Question[]
 
-    @Column()
+    @Column({default: true})
     is_active: boolean;
 
     @Column()

@@ -1,10 +1,10 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Lecture } from "./entity/lectures/lectures"
-import { Answer } from "./entity/tests/answers"
-import { Question } from "./entity/tests/questions"
-import { Test } from "./entity/tests/test"
-import { Users } from "./entity/users/users"
+import { Lecture } from "./entity/lectures"
+import { Answer } from "./entity/answers"
+import { Question } from "./entity/questions"
+import { Test } from "./entity/test"
+import { Users } from "./entity/users"
 
 
 export const AppDataSource = new DataSource({
@@ -16,7 +16,8 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: true,
     logging: false,
+    // entities: ['src/entity/*.entity.ts'],
     entities: [Lecture, Test, Question, Answer, Users],
-    migrations: [],
+    migrations: ['src/migrations/*.ts'],
     subscribers: [],
 })

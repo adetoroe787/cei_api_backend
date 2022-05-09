@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Lecture } from "../entity/lectures/lectures";
+import { Lecture } from "../entity/lectures";
 import { AppDataSource } from "../data-source";
 
 
@@ -32,14 +32,14 @@ class LectureController {
 
 
   static getOneLecture = async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const lecture = await AppDataSource.getRepository(Lecture).findOne(id);
+    //const id = req.params.id;
+    const lecture = await AppDataSource.getRepository(Lecture).findOneBy({ id: parseInt(req.params.id) });
     return res.json(lecture);
   };
 
 
   static updateLecture= async (req: Request, res: Response) => {
-    const lecture = await AppDataSource.getRepository(Lecture).findOne(req.params.id);
+    const lecture = await AppDataSource.getRepository(Lecture).findOneBy({ id: parseInt(req.params.id) });
     if (lecture) {
       AppDataSource.getRepository(Lecture).merge(lecture, req.body);
       const result = await AppDataSource.getRepository(Lecture).save(lecture);

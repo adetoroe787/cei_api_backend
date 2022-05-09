@@ -14,10 +14,10 @@ export class Question {
     @ManyToOne(() => Test, (test) => test.question)
     test: Test
 
-    @OneToMany(() => Answer, (answers) => answers.user)
+    @OneToMany(() => Answer, (answers) => answers.question)
     answers: Answer[]
 
-    @Column()
+    @Column({default: true})
     is_active: boolean;
 
     @Column()

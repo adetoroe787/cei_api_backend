@@ -1,5 +1,5 @@
 
-import { Users } from '../entity/users/users'
+import { Users } from '../entity/users'
 
 import { Request, Response } from "express";
 import { AppDataSource } from '../data-source';
@@ -34,7 +34,7 @@ export class GetUsers {
 export class getOneUsers {
 
     static getOneUser = async (req: Request, res: Response) => {
-        const id = req.params.id;
+        //const id = req.params.id;
         const user = await AppDataSource.getRepository(Users).findOneBy({ id: parseInt(req.params.id) });
         return res.json(user);
     };

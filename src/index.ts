@@ -5,11 +5,15 @@ import UserRouter from "./routes/userRoutes"
 const express = require('express');
 const authRoute = require('./routes/auth');
 const dotenv = require("dotenv");
+const cors = require('cors');
+const BodyParser = require('body-parser');
 
 dotenv.config();
 
 const app = express()
-app.use(express.json())
+// app.use(express.json())
+app.use(cors());
+app.use(BodyParser.json());
 
 AppDataSource
     .initialize()
@@ -20,8 +24,8 @@ AppDataSource
         console.error("Error during Data Source initialization:", err)
     })
 
-app.use("/api/v1", UserRouter )
-app.use("/api/v1", Testrouter )
+app.use("/api/v1", UserRouter)
+app.use("/api/v1", Testrouter)
 app.use("/api/v1", Lecturerouter)
 app.use("/api/v1/auth", authRoute);
 
@@ -30,4 +34,4 @@ app.listen(process.env.PORT || 3000, () => {
         🚀  Server is running!
         🔉  Listening on port ${process.env.PORT || 3000}
       `);
-  });
+});

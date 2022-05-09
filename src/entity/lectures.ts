@@ -1,6 +1,7 @@
 import { IsFQDN } from "class-validator";
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Admin } from "../users/admin";
+import { Users } from "./users";
+
 
 
 export enum lectureYear {
@@ -26,7 +27,7 @@ export class Lecture {
     @IsFQDN()
     url: string;
 
-    @Column()
+    @Column({default: true})
     is_active: boolean;
 
     @Column({
@@ -37,9 +38,9 @@ export class Lecture {
     year: lectureYear
 
 
-    @ManyToMany(() => Admin)
+    @ManyToMany(() => Users)
     @JoinTable()
-    lecturer: Admin[]
+    lecturer: Users[]
 
     @Column()
     @CreateDateColumn()
